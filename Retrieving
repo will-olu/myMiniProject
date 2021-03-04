@@ -1,1 +1,15 @@
 
+import wget #I used pip install wget to obtain the files from ncbi
+
+#I put each URL into variable settings
+url = 'https://www.ncbi.nlm.nih.gov/sra/SRX2896360'
+url2 = 'https://www.ncbi.nlm.nih.gov/sra/SRX2896363'
+url3 = 'https://www.ncbi.nlm.nih.gov/sra/SRX2896374'
+url4 = 'https://www.ncbi.nlm.nih.gov/sra/SRX2896375
+'
+# I then downloaded each wget url to my python code and put a corresponding filename with the wget download
+# Works a bit better in python
+filename = wget.download(url)
+filename2 = wget.download(url2)
+filename3 = wget.download(url3)
+filename4 = wget.download(url4)
