@@ -1,0 +1,141 @@
+#Retrieving the HCMV and comparing putting it into our index
+Entrez.email = "aoluajeigbe@luc.edu"
+
+handle = Entrez.efetch(db = "nucelotide", id = "EF999921", rettype = "fasta")
+
+record = SeqIO.parse(handle, "fasta")
+
+kallisto index  -i record
+
+
+
+
+# count conditions for each file
+
+for line in filename:
+    if line.startswith(">"):
+        n +=1
+    print("There are " + n + "contigs > 1000 bp in the assembly")
+
+for line2 in filename2:
+    if line.startswith(">"):
+          n2 +=1
+    print("There are " + n + "contigs > 1000 bp in the assembly")
+    
+for line3 in filename3:
+    if line.startswith(">"):
+          n3 +=1
+    print("There are " + n + "contigs > 1000 bp in the assembly")
+
+for line4 in filename4:
+    if line.startswith(">"):
+          n4 +=1
+    print("There are " + n + "contigs > 1000 bp in the assembly")
+
+
+#counting the number of base pairs in the file
+
+lines = SeqIO.read(filename, "fasta")
+    for feature in lines.features: # for loop to iterate the strings
+        if my_snp in feature: #taking snps of the file features
+            print("%s %s" % (feature.type, feature.qualifiers.get("filename"))) #retrieving a file
+lines2 = SeqIO.read(filename2, "fasta"):
+    for feature in lines.features:
+            if my_snp in feature:
+                print("%s %s" % (feature.type, feature.qualifiers.get("db_xref")))
+lines3 = SeqIO.read(filename3, "fasta"):
+    for feature in lines.features:
+                if my_snp in feature:
+                    print("%s %s" % (feature.type, feature.qualifiers.get("db_xref")))
+lines4 = SeqIO.read(filename4, "fasta"):
+    for feature in lines.features:
+                if my_snp in feature:
+                    print("%s %s" % (feature.type, feature.qualifiers.get("db_xref")))
+#extracting the coding sequence
+
+
+#extracting the largest
+rec1 = SeqIO.parse(filename, "fasta")
+rec2 = SeqIO.parse(filename2, "fasta")
+rec3 = SeqIO.parse(filename3, "fasta")
+rec4 = SeqIO.parse(filename4, "fasta")
+
+for line in rec1:
+    if line.startswith(">"): # line the
+        #last sequence ended:
+        if len(current_string) > max : # list through
+            max = len(current_string)
+            max_name = current_name
+
+        #start reading a new sequence:
+        current_name = line
+        current_string=""
+    else:
+        current_string+=line.strip("\n")
+print max_name, max
+
+
+#repeating the steps for the following files
+for line in rec1:
+    if line.startswith(">"): # line the
+        #last sequence ended:
+        if len(current_string) > max : # list through
+            max = len(current_string)
+            max_name = current_name
+
+        #start reading a new sequence:
+        current_name = line
+        current_string=""
+    else:
+        current_string+=line.strip("\n")
+print max_name, max
+
+for line in rec2:
+    if line.startswith(">"): # line the
+        #last sequence ended:
+        if len(current_string) > max : # list through
+            max = len(current_string)
+            max_name = current_name
+
+        #start reading a new sequence:
+        current_name = line
+        current_string=""
+    else:
+        current_string+=line.strip("\n")
+print max_name, max
+
+for line in rec3:
+    if line.startswith(">"): # line the
+        #last sequence ended:
+        if len(current_string) > max : # list through
+            max = len(current_string)
+            max_name = current_name
+
+        #start reading a new sequence:
+        current_name = line
+        current_string=""
+    else:
+        current_string+=line.strip("\n")
+print max_name, max
+
+
+for line in rec4:
+    if line.startswith(">"): # line the
+        #last sequence ended:
+        if len(current_string) > max : # list through
+            max = len(current_string)
+            max_name = current_name
+
+        #start reading a new sequence:
+        current_name = line
+        current_string=""
+    else:
+        current_string+=line.strip("\n")
+print max_name, max
+
+#Running the blast of the record sequence from NCBI
+from Bio.Blast import NCBIWWW
+
+sequence_data = open(record.read())
+result_handle = NCBIWWW.qblast("blastn", "nt" seq_record.seq)
+print(result_handle)
